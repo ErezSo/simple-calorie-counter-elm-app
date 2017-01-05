@@ -1,5 +1,10 @@
 module Main exposing (..)
 
+import Html exposing (..)
+import Html.Events exposing (..)
+import Html.Attributes exposing (..)
+
+
 -- Model
 
 
@@ -29,3 +34,34 @@ update msg model =
 
         Clear ->
             initModel
+
+
+
+-- View
+
+
+view : Model -> Html Msg
+view model =
+    div []
+        [ h3 []
+            [ text ("Total calories: " ++ (toString model)) ]
+        , button
+            [ type_ "button"
+            , onClick AddCalorie
+            ]
+            [ text "Add calorie" ]
+        , button
+            [ type_ "button"
+            , onClick Clear
+            ]
+            [ text "Clear" ]
+        ]
+
+
+main : Program Never Model Msg
+main =
+    Html.beginnerProgram
+        { model = initModel
+        , update = update
+        , view = view
+        }
